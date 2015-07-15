@@ -18,9 +18,9 @@ def index():
 @app.route('/post', methods=['GET', 'POST'])
 def post_message():
     if request.method == 'POST':
-        msg = request.form['message']
+        msg = request.form['message'].encode('utf8')
         if msg:
-            socketio.emit('post danmu', {'data': request.form['message']}, namespace='/test')
+            socketio.emit('post danmu', {'data': msg}, namespace='/test')
             print msg
             flash('Success')
     return render_template('post_form.html')
