@@ -22,7 +22,7 @@ def post_message():
         if msg:
             socketio.emit('post danmu', {'data': msg}, namespace='/test')
             print msg
-            flash('Success')
+            flash(u'提交成功:)')
     return render_template('post_form.html')
 
 @socketio.on('connect', namespace='/test')
