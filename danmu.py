@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, flash
 from flask.ext.socketio import SocketIO, emit
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'cldds_safeword'
+app.config['DEBUG']=True
 socketio = SocketIO(app)
 
 class DanMu(object):
