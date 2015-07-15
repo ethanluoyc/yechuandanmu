@@ -63,9 +63,10 @@
 
                 $("#"+fly_tmp_name).text(msg);
                 $("#"+fly_tmp_name).css({"position":"absolute"
-                                ,"top":top_local
-                                ,"left":options.width,
-                                "font-size":options.font_size_big
+                                            ,"top":top_local
+                                            ,"left":options.width
+                                            ,"font-size":options.font_size_big
+                                            ,"whitespace":"nowrap"
                                  });
                 $("#"+fly_tmp_name).animate({left:-danmuPlayer.width()*3},options.speed
                     ,function(){$(this).remove();})
