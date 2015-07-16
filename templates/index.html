@@ -1,11 +1,189 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>弹幕测试</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='danmu/jquery.danmu.js') }}"></script>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Cover Template for Bootstrap</title>
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- Custom styles for this template -->
+        <link href="{{ url_for('static',filename='css/cover.css')  }}" rel="stylesheet">
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    </head>
+    <body>
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="cover-container">
+                    <div class="masthead clearfix">
+                        <div class="inner">
+{#                            <h3 class="masthead-brand">Cover</h3>#}
+                            <ul class="nav masthead-nav" style="display:none">
+                                <li class="active">
+                                    <a href="#">Home</a>
+                                </li>
+                                <li>
+                                    <a href="#">Features</a>
+                                </li>
+                                <li>
+                                    <a href="#">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="inner cover">
+                        <h1 class="cover-heading">叶串2015</h1>
+                        <p class="lead"> Lorem Ipu solum</p>
+                        <p class="lead"><a href="#" class="btn btn-lg btn-default" id="fullscreen">开始弹幕</a></p>
+                        <a class="btn btn-default" href="#" role="button" id="danmu-start">Start</a>
+                        <a class="btn btn-default" href="#" role="button" id="danmu-go">Go</a>
+                    </div>
+
+                    <div id="danmuholder"><div id="danmu"></div></div>
+                    <style>
+                        div#danmuholder {
+                            position: absolute;
+                            left:0px;
+                            top:0px;
+                            background-color: black;
+                            height:100%;
+                            width:100%;
+                            display: none;
+                        }
+                        div#danmu{
+                            background-color: black;
+                        }
+                    </style>
+                    <div class="mastfoot">
+                        <div class="inner">
+                            <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+{#        <script src="assets/js/jquery.min.js"></script>#}
+{#        <script src="bootstrap/js/bootstrap.min.js"></script>#}
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+{#        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>#}
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+        <script type="text/javascript" src="{{url_for('static',filename='danmu/jquery.danmu.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+            var danmuss = {
+                1: [{"text": "哈哈哈", "color": "red", "size": "0", "position": "0"},
+                    {"text": "233333", "color": "red", "size": "0", "position": "0"}],
+                3: [{"text": "poi", "color": "red", "size": "1", "position": "0"},
+                    {"text": "2333", "color": "#FFFFFF", "size": "0", "position": "0"}],
+                10: [{"text": "XXX真好", "color": "#FFFFFF", "size": "0", "position": "2"}]
+            };
+            // settings for the Danmu Player
+            var options = {
+                left: 0,
+                top: 0,
+                height: screen.height,
+                width: screen.width,
+                zindex: 100,
+                speed: 20000,
+                sumtime: 900,
+                danmuss: danmuss,
+                default_font_color: "#FFFFFF",
+                font_size_small: 30,
+                font_size_big: 50,
+                opacity: "0.9",
+                top_botton_danmu_time: 6000
+            };
+
+
+            $("#danmu").danmu(options);
+
+            var danmuPlayer = $('#danmu');
+
+            $('#danmu-start').click(function(){
+               $("#danmu").danmu('danmu_start');});
+
+            $('#danmu-go').click(function(){
+                show_danmu(danmuPlayer,'heoolow');
+            });  //todo
+
+            $('#fullscreen').click(function(){
+                $('#danmuholder').css({"display":"block"});
+                document.getElementById('danmuholder').webkitRequestFullScreen();
+            });
+
+            function show_danmu(danmuPlayer,msg){
+                var heig=danmuPlayer.height();
+	            var row_conut=parseInt(heig/options.font_size_big);
+                var row = parseInt(row_conut*Math.random());
+                var top_local=(row)*options.font_size_big;
+
+                var a_danmu="<div class='flying flying2' id='linshi'></div>";
+                danmuPlayer.append(a_danmu);
+                fly_tmp_name = "fly"+parseInt(heig*Math.random()).toString();
+
+                $("#linshi").attr("id",fly_tmp_name);
+
+                $("#"+fly_tmp_name).text(msg);
+                $("#"+fly_tmp_name).css({"position":"absolute"
+                                            ,"top":top_local
+                                            ,"left":options.width
+                                            ,"font-size":options.font_size_big
+                                            ,"white-space":"nowrap"
+                                 });
+                $("#"+fly_tmp_name).animate({left:-danmuPlayer.width()*3},options.speed
+                    ,function(){$(this).remove();})
+            }
+
+            namespace = '/test'; // change to an empty string to use the global namespace
+
+            // the socket.io documentation recommends sending an explicit package upon connection
+            // this is specially important when using the global namespace
+            var socket = io.connect('https://' + document.domain + ':' + location.port + namespace);
+            socket.on('connect', function() {
+                console.log('connected');
+            });
+            socket.on('disconnect',function(){
+                console.log('disconnected');
+            })
+            // event handler for server sent data
+            // the data is displayed in the "Received" section of the page
+            socket.on('post danmu', function(msg) {
+                console.log('received!');
+                $('#board').append('<br>Received #'+ msg.data);
+                var dm = { "text":msg['data'],
+                           "color":"white",
+                           "size":"1",
+                           "position":"0",
+                           "time": $('#danmu').data('nowtime')};
+                show_danmu(danmuPlayer,msg.data);
+            });
+        });
+    </script>
+    <script type="text/javascript" src="{{url_for('static',filename='jquery.hotkeys.js') }}"></script>
+    <script tyep="text/javascript">
+        $(document).ready(function(){
+            $(document).bind('keydown', 'd', function(){
+                console.log('keydown');
+{#                enterFullScreen();#}
+                $('#danmuholder').fadeToggle("slow");
+
+        });
+        })
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -97,29 +275,8 @@
             });
         });
     </script>
-</head>
-<body>
-    <h1>弹幕测试</h1>
-    <div id="board"></div>
-    <h2 id="receive">Receive:</h2>
-    <a class="btn btn-default" href="#" role="button" id="danmu-start">Start</a>
-    <a class="btn btn-default" href="#" role="button" id="danmu-go">Go</a>
-    <input id="fullscreen" type="button" value="Full Screen">
-    <script type="text/javascript">
 
-    </script>
-    <div id="danmuholder"><div id="danmu"></div></div>
-    <style>
-        div#danmuholder {
-            position: relative;
-            background-color: black;
-            height:100%;
-            width:100%;
 
-                }
-        div#danmu{
-            background-color: black;
-        }
-    </style>
-</body>
+
+    </body>
 </html>
