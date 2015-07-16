@@ -19,10 +19,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-                    {% with messages = get_flashed_messages() %}
+                    {% with messages = get_flashed_messages(with_categories=True) %}
                         {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-success">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
                                 {{ message }}
                         {% endfor %}
                              </div>
@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
                     <center>
-                        <img src="{{ url_for('static',filename='images/logo.jpeg') }}" width="100" class="btm-logo" style="margin-top: 20px"/>
+                        <img src="{{ url_for('static',filename='images/logo_white.jpeg') }}" width="100" class="btm-logo" style="margin-top: 20px"/>
                     </center>
                 </div>
             </div>
@@ -46,7 +46,7 @@
         <footer class="navbar-fixed-bottom">
             <div class="container">
                 <a href="http://google.com" title="About">About</a>
-                <span class="text-nowrap pull-right"><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color:#ff4f33"></i> by Ethan</span>
+                <span class="text-nowrap pull-right"><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color:#ff4f33"></i> by Luo Yicheng</span>
             </div>
         </footer>
 </body>

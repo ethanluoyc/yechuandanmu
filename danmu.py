@@ -1,4 +1,5 @@
 #coding=utf-8
+
 from flask import Flask, render_template, request, flash
 from flask.ext.socketio import SocketIO, emit
 
@@ -20,9 +21,11 @@ def post_message():
     if request.method == 'POST':
         msg = request.form['message'].encode('utf8')
         if msg:
+            if len(msg) > 20:
+                flash(u'The message is too long', 'danger')
+                return render_template('post_form.html')
             socketio.emit('post danmu', {'data': msg}, namespace='/test')
-            print msg
-            flash(u'提交成功:)')
+            flash(u'提交成功:)','success')
     return render_template('post_form.html')
 
 @socketio.on('connect', namespace='/test')
