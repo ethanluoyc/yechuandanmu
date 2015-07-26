@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
     <title>叶串2015-发送弹幕</title>
@@ -8,46 +9,44 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
+
 <body>
     <div class="container container-body">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="page-header">
-                        <h1 style="display: block;">叶串之声2015</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-                    {% with messages = get_flashed_messages(with_categories=True) %}
-                        {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">
-                                {{ message }}
-                        {% endfor %}
-                             </div>
-                        {% endif %}
-                    {% endwith %}
-                    <form method="POST" action="">
-                        <input type="text" class="form-control" id="message" name="message" placeholder="弹幕内容">
-                        <br>
-                        <button type="submit" class="btn btn-lg btn-success btn-block">提交吐槽</button>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-                    <center>
-                        <img src="{{ url_for('static',filename='images/logo_white.jpeg') }}" width="100" class="btm-logo" style="margin-top: 20px"/>
-                    </center>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="page-header">
+                    <h1 style="display: block;">叶串之声2015</h1>
                 </div>
             </div>
         </div>
-        <footer class="navbar-fixed-bottom">
-            <div class="container">
-                <a href="http://google.com" title="About">About</a>
-                <span class="text-nowrap pull-right"><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color:#ff4f33"></i> by Luo Yicheng</span>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+                {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %} {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }} {% endfor %}
+                </div>
+                {% endif %} {% endwith %}
+                <form method="POST" action="">
+                    <input type="text" class="form-control" id="message" name="message" placeholder="弹幕内容">
+                    <br>
+                    <button type="submit" class="btn btn-lg btn-success btn-block">Submit Danmaku</button>
+                </form>
             </div>
-        </footer>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
+                <center>
+                    <img src="{{ url_for('static',filename='images/logo_white.jpeg') }}" width="100" class="btm-logo" style="margin-top: 20px" />
+                </center>
+            </div>
+        </div>
+    </div>
+    <footer class="navbar-fixed-bottom">
+        <div class="container">
+            <a href="http://google.com" title="About">About</a>
+            <span class="text-nowrap pull-right"><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color:#ff4f33"></i></span>
+        </div>
+    </footer>
 </body>
+
 </html>

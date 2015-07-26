@@ -1,79 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Cover Template for Bootstrap</title>
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <!-- Custom styles for this template -->
-        <link href="{{ url_for('static',filename='css/cover.css')  }}" rel="stylesheet">
 
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>叶串之声2015</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='css/cover.css')}}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    </head>
-    <body>
-        <div class="site-wrapper">
-            <div class="site-wrapper-inner">
-                <div class="cover-container">
-                    <div class="masthead clearfix">
-                        <div class="inner">
-                        </div>
+</head>
+<body>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
                     </div>
-                    <div class="inner cover">
-                        <h1 class="cover-heading">叶串2015</h1>
-                        <p class="lead">国初华会荣誉呈现</p>
-
+                </div>
+                <div class="inner cover">
+                    <h1 class="cover-heading">叶串2015</h1>
+                    <p class="lead">国初华会荣誉呈现</p>
+                </div>
+                <img id="board-logo" src="{{ url_for('static',filename='images/logo_black.png')}}">
+                <div class="url-footer">
+                    <h3>弹幕吐槽在这里: tinyurl.com/yechuan15danmu</h3>
+                </div>
+                <!-- Danmu player div -->
+                <div id="danmuholder">
+                    <div id="danmu"></div>
+                </div>
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by Luo Yicheng</p>
                     </div>
-                    <img id="board-logo" src="{{ url_for("static",filename="images/logo_black.png") }}">
-                    <div class="url-footer">
-                        <h3>弹幕吐槽在这里: tinyurl.com/yechuan15danmu</h3>
-                    </div>
-
-
-                    <div id="danmuholder"><div id="danmu"></div></div>
-                    <div class="mastfoot">
-                        <div class="inner">
-                            <p><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by Luo Yicheng</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-        <!-- Bootstrap core JavaScript
+    </div>
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-{#        <script src="assets/js/jquery.min.js"></script>#}
-{#        <script src="bootstrap/js/bootstrap.min.js"></script>#}
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-{#        <script src="assets/js/ie10-viewport-bug-workaround.js"></script>#}
-        <script type="text/javascript" src="//code.jquery.com/jquery-1.4.4.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="{{url_for('static',filename='danmu/jquery.danmu.js') }}"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+    <!-- Use a version of Socket.io compatible with Flask extension -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <!-- jQuery UI javascript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='danmu/jquery.danmu.js') }}"></script>
+    <!-- jQuery Hotkey -->
     <script type="text/javascript" src="{{url_for('static',filename='jquery.hotkeys.js') }}"></script>
     <!-- Script for keyboard shortcut -->
     <script type="text/javascript">
-        $(document).ready(function(){
-            $(document).bind('keydown', 'd', function(){
-                if ($('#danmuholder').css("display") == 'none'){
-                $('#danmuholder').fadeIn("slow",function(){
-                    $("#board-logo").fadeIn("slow", function(){
-                        $(".url-footer").fadeIn("slow");
+        $(document).ready(function() {
+            $(document).bind('keydown', 'd', function() {
+                if ($('#danmuholder').css("display") == 'none') {
+                    $('#danmuholder').fadeIn("slow", function() {
+                        $("#board-logo").fadeIn("slow", function() {
+                            $(".url-footer").fadeIn("slow");
+                        });
                     });
-                });}
-                else {
-                    $("#board-logo").fadeOut("slow",function(){
+                } else {
+                    $("#board-logo").fadeOut("slow", function() {
                         $('#danmuholder').fadeOut("slow");
                     });
                     $(".url-footer").fadeOut("slow");
@@ -85,108 +82,25 @@
             $(document).bind('keydown', 'n', function() {
                 $(".url-footer").fadeToggle("slow");
             });
-
+            // Toggle opacity of the Danmuplayer, use animate rather than fade to avoid texts from inner divs from being affected by the changes in opacity
             $(document).bind('keypress', 'j', function() {
                 console.log('pressed');
-                $("#danmu").animate({backgroundColor:"rgba(0,0,0,1)"},600);
+                $("#danmu").animate({
+                    backgroundColor: "rgba(0,0,0,1)"
+                }, 600);
             });
 
             $(document).bind('keypress', 'k', function() {
                 console.log("pressed");
-                $("#danmu").animate({backgroundColor:"rgba(0,0,0,0.5)"},600);
+                $("#danmu").animate({
+                    backgroundColor: "rgba(0,0,0,0.5)"
+                }, 600);
             });
 
 
         })
     </script>
     <!-- Script for Socket.IO and Danmu-->
-    <script type="text/javascript">
-        $(document).ready(function() {
-
-            var danmuss = {
-                1: [{"text": "哈哈哈", "color": "red", "size": "0", "position": "0"},
-                    {"text": "233333", "color": "red", "size": "0", "position": "0"}],
-                3: [{"text": "poi", "color": "red", "size": "1", "position": "0"},
-                    {"text": "2333", "color": "#FFFFFF", "size": "0", "position": "0"}],
-                10: [{"text": "XXX真好", "color": "#FFFFFF", "size": "0", "position": "2"}]
-            };
-            // settings for the Danmu Player
-            var options = {
-                left: 0,
-                top: 0,
-                height: screen.height,
-                width: screen.width,
-                zindex: 100,
-                speed: 20000,
-                sumtime: 900,
-                danmuss: danmuss,
-                default_font_color: "#FFFFFF",
-                font_size_small: 50,
-                font_size_big: 70,
-                opacity: 1.0,
-                top_botton_danmu_time: 6000
-            };
-
-            function randomChoice(arr) {
-               return arr[Math.floor(arr.length * Math.random())];
-            }
-
-            $("#danmu").danmu(options);
-            var danmuPlayer = $('#danmu');
-
-            function show_danmu(danmuPlayer,msg){
-                var heig=danmuPlayer.height();
-	            var row_conut=parseInt(heig/options.font_size_big);
-                var row = parseInt(row_conut*Math.random());
-                var top_local=(row)*options.font_size_big;
-
-                var a_danmu="<div class='flying flying2' id='linshi'></div>";
-                danmuPlayer.append(a_danmu);
-                fly_tmp_name = "fly"+parseInt(heig*Math.random()).toString();
-
-                $("#linshi").attr("id",fly_tmp_name);
-
-                $("#"+fly_tmp_name).text(msg);
-                $("#"+fly_tmp_name).css({"position":"absolute"
-                                            ,"top":top_local
-                                            ,"left":options.width
-                                            ,"font-size":randomChoice([50,60,70])
-                                            ,"white-space":"nowrap"
-                                            ,"color":"white"
-{#                                            ,"opacity":1.0#}
-                                 });
-                $("#"+fly_tmp_name).animate({left:-danmuPlayer.width()*3},options.speed
-                    ,function(){$(this).remove();})
-            }
-
-            namespace = '/test'; // change to an empty string to use the global namespace
-
-            // the socket.io documentation recommends sending an explicit package upon connection
-            var socket = io.connect('//' + document.domain + ':' + location.port + namespace);
-            socket.on('connect', function() {
-                console.log('connected');
-            });
-            socket.on('disconnect',function(){
-                console.log('disconnected');
-            })
-
-
-            // event handler for server sent data
-            socket.on('post danmu', function(msg) {
-                console.log('received!');
-                $('#board').append('<br>Received #'+ msg.data);
-                var dm = { "text":msg['data'],
-                           "color":"white",
-                           "size":randomChoice(["0","1"]),
-                           "position":"0",
-                           "time": $('#danmu').data('nowtime')};
-
-                show_danmu(danmuPlayer,msg.data);
-            });
-        });
-    </script>
-
-
-
-    </body>
+    <script type="text/javascript" src="{{url_for('static',filename='danmu/danmu.js') }}"></script>
+</body>
 </html>

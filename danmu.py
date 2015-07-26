@@ -8,13 +8,11 @@ app.config['SECRET_KEY'] = 'cldds_safeword'
 app.config['DEBUG'] = True
 socketio = SocketIO(app)
 
-class DanMu(object):
-    def __init__(text, color, size, time, isnew=False):
-        pass
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/post', methods=['GET', 'POST'])
 def post_message():
@@ -24,16 +22,17 @@ def post_message():
             if len(msg) > 20:
                 flash(u'The message is too long', 'danger')
                 return render_template('post_form.html')
-            socketio.emit('post danmu', {'data': msg}, namespace='/test')
-            flash(u'提交成功 :)','success')
+            socketio.emit('post danmu', {'data': msg}, namespace='/post')
+            flash(u'Post succeeded :)', 'success')
     return render_template('post_form.html')
 
-@socketio.on('connect', namespace='/test')
+
+@socketio.on('connect', namespace='/post')
 def test_connect():
     print ('Client connected')
 
-#
-# @socketio.on('disconnect', namespace='/test')
+
+# @socketio.on('disconnect', namespace='/post')
 # def test_disconnect():
 #     print('Client disconnected')
 
