@@ -19,7 +19,7 @@ def post_message():
     if request.method == 'POST':
         msg = request.form['message']
         if msg:
-            if len(msg) > 20:
+            if len(msg) > 30:
                 flash(u'The message is too long', 'danger')
                 return render_template('post_form.html')
             socketio.emit('post danmu', {'data': msg}, namespace='/post')

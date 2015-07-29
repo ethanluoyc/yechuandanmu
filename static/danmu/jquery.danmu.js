@@ -5,7 +5,6 @@
  * Licensed under the Cyntax Open Technology License
  *     http://code.cyntax.com/licenses/cyntax-open-technology
  */
-
 (function( $ ) {
 	$.jQueryPlugin = function( name ) {
 		$.fn[name] = function( options ) {
@@ -140,7 +139,7 @@ var cyntax = {
 		this.timer_info = {id:null, index:null, state:0};
 	};
 	cyntax.plugins.timer.prototype = {
-		defaults : { 
+		defaults : {
 			delay: 1000,      // delay in milliseconds (optional)
 			repeat: false,    // true to repeat the timer continuously, or a number for repeating this number of times (optional)
 			autostart: true,	// timer starts as soon as it is created, set false to start manually
@@ -184,7 +183,7 @@ var cyntax = {
 				this.timer_id = setTimeout( $.proxy( this._timer_fn, this ) , this.options.delay);
 			}
 		},
-		
+
 		stop : function(){
 			if ( this.timer_info.state == 1 && this.timer_info.id ) {
 				clearTimeout(this.timer_info.id);
@@ -192,13 +191,13 @@ var cyntax = {
 			}
 			this.timer_info.state = 0;
 		},
-		
+
 		pause : function() {
 			if ( this.timer_info.state == 1 && this.timer_info.id )
 				clearTimeout(this.timer_info.id);
 			this.timer_info.state = 0;
 		},
-		
+
 		resume : function() {
 			this.timer_info.state = 1;
 			this.timer_id = setTimeout( $.proxy( this._timer_fn, this ) , this.options.delay);
@@ -206,12 +205,12 @@ var cyntax = {
 	};
 
 	$.jQueryPlugin( "timer" );
-	
+
 })( jQuery );
 ;/*!
  *弹幕引擎核心
  *
- * Copyright 2015 by Liyawei Of AcGit.cc 
+ * Copyright 2015 by Liyawei Of AcGit.cc
  * @license MIT
  */
 
@@ -221,7 +220,7 @@ var cyntax = {
 
 
  var Danmu= function (element, options) {
-    this.$element	= $(element);  
+    this.$element	= $(element);
     this.options	= options;
     $(element).data("nowtime",0);
     $(element).data("danmu_array",options.danmuss);
@@ -267,7 +266,7 @@ var cyntax = {
 						,"opacity": $(element).data("opacity")
 						,"white-space":"nowrap"
 						,"font-weight":"bold"
-						,"font-family":"SimHei" 
+						,"font-family":"SimHei"
 						,"font-size":options.font_size_big
 					});
 					if (danmus[i].color<"#777777")
@@ -296,10 +295,10 @@ var cyntax = {
 										,"top":top_local
 										,"left":options.width
 										 });
-						var fly_tmp_name="fly"+parseInt(heig*Math.random()).toString();	
+						var fly_tmp_name="fly"+parseInt(heig*Math.random()).toString();
 						$("#linshi").attr("id",fly_tmp_name);
 						$('#'+fly_tmp_name).animate({left:-$(this).width()*3,},options.speed
-							,function(){$(this).remove();}	
+							,function(){$(this).remove();}
 						 );
 					}
 					else if ( danmus[i].position == 1){
@@ -316,7 +315,7 @@ var cyntax = {
 							$(this).remove();
 							$(element).data("topspace",$(element).data("topspace")-options.font_size_big);
 						}
-						);						
+						);
 					}
 					else if ( danmus[i].position == 2){
 						var bottom_tmp_name="top"+parseInt(10000*Math.random()).toString();
@@ -333,21 +332,21 @@ var cyntax = {
 							$(element).data("bottomspace",$(element).data("bottomspace")-options.font_size_big)
 						}
 						);
-						
+
 					} //else if
 				}   // for in danmus
 			}  //if (danmus)
 				$(element).data("nowtime",$(element).data("nowtime")+1);
-			
-			
+
+
 		}
-	});		  
+	});
 };
 
 
 Danmu.DEFAULTS = {
-		left: 0,    
-		top: 0 , 
+		left: 0,
+		top: 0 ,
 		height: 360,
 		width: 640,
 		zindex :100,
@@ -363,7 +362,7 @@ Danmu.DEFAULTS = {
 
 
 
-Danmu.prototype.danmu_start = function(){	
+Danmu.prototype.danmu_start = function(){
 	this.$timer.timer('start');
 	this.$element.data("paused",0);
 };
@@ -406,7 +405,7 @@ Danmu.prototype.add_danmu = function(arg){
 
 };
 
-	
+
 function Plugin(option,arg) {
     return this.each(function () {
       var $this   = $(this);
@@ -414,7 +413,7 @@ function Plugin(option,arg) {
       var data    = $this.data('danmu');
       var action  = typeof option == 'string' ? option : NaN;
       if (!data) $this.data('danmu', (data = new Danmu(this, options)))
-      if (action)	data[action](arg);  
+      if (action)	data[action](arg);
     })
 };
 

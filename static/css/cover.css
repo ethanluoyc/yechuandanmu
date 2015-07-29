@@ -27,7 +27,7 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  /*background-color: #333;*/
 }
 body {
   color: #fff;
@@ -37,14 +37,14 @@ body {
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  background-image: url("/static/images/yechuan2.png");
-  background-size: 100% 100%;
+  /*background-image: url("/static/images/yechuan2.png");*/
+  /*background-size: 100% 100%;*/
   display: table;
   width: 100%;
   height: 100%; /* For at least Firefox */
   min-height: 100%;
-  -webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
-          box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+  /*-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);*/
+          /*box-shadow: inset 0 0 100px rgba(0,0,0,.5);*/
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -209,4 +209,30 @@ div#danmu{
 .cover-heading {
   font-size:80px;
   font-family: "Georgia", "Xin Gothic", "Hiragino Sans GB", "Droid Sans Fallback", "Microsoft YaHei", sans-serif;
+}
+
+video#bgvid {
+position: fixed;
+top: 50%;
+left: 50%;
+/*min-width: 75%;*/
+/*min-height: 75%;*/
+width: auto;
+height: 100%;
+/*z-index: 20;*/
+-webkit-transform: translateX(-50%) translateY(-50%);
+transform: translateX(-50%) translateY(-50%);
+background:  url("/static/images/yechuan2.png") no-repeat;
+background-size: cover;
+}
+
+
+div#bgdvid-container{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding:0;
+  margin:0;
+  z-index: -1;
+  overflow:hidden;
 }

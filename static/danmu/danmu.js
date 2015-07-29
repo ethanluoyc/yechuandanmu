@@ -1,36 +1,7 @@
 $(document).ready(function() {
 
-    var danmuss = {
-        1: [{
-            "text": "哈哈哈",
-            "color": "red",
-            "size": "0",
-            "position": "0"
-        }, {
-            "text": "233333",
-            "color": "red",
-            "size": "0",
-            "position": "0"
-        }],
-        3: [{
-            "text": "poi",
-            "color": "red",
-            "size": "1",
-            "position": "0"
-        }, {
-            "text": "2333",
-            "color": "#FFFFFF",
-            "size": "0",
-            "position": "0"
-        }],
-        10: [{
-            "text": "XXX真好",
-            "color": "#FFFFFF",
-            "size": "0",
-            "position": "2"
-        }]
-    };
-    // settings for the Danmu Player
+    var danmuss = {};
+    // Settings for the Danmu Player!
     var options = {
         left: 0,
         top: 0,
@@ -57,7 +28,8 @@ $(document).ready(function() {
     var danmuPlayer = $('#danmu'); // a selector for the danmu div
 
     function show_danmu(danmuPlayer, msg) {
-        var heig = danmuPlayer.height();
+        //console.log(msg);
+        var heig = danmuPlayer.height()/1.5;
         var row_conut = parseInt(heig / options.font_size_big);
         var row = parseInt(row_conut * Math.random());
         var top_local = (row) * options.font_size_big;
