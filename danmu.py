@@ -33,24 +33,25 @@ def post_message():
             flash(u'Post succeeded :)', 'success')
     return render_template('post_form.html')
 
-@socketio.on('approve danmu', namespace='/check')
-def approve_danmu(msg):
-    print msg
-    socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
-
-
 @app.route('/check', methods=['GET'])
 def check_danmu():
     return render_template('check.html')
 
+
+@socketio.on('approve danmu', namespace='/check')
+def approve_danmu(msg):
+    app.logger.info(msg)
+    socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
+
+
 @socketio.on('connect', namespace='/post')
 def test_connect():
-    print ('Client posting connected')
+    app.logger.info('Board posting connected')
 
 
 @socketio.on('connect', namespace='/check')
 def test_check_connect():
-    print ('Client checking connected')
+    app.logger.info('Checking connected')
 
 # @socketio.on('disconnect', namespace='/post')
 # def test_disconnect():

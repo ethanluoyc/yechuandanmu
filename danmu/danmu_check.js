@@ -24,7 +24,7 @@ $(document).ready(function(){
 
     $(document).bind('keydown', 'right', function() {
         msg = $('#msg-queue tr:first').text();
-        console.log(msg);
+        console.log('Sent: ' + msg.data);
         socket.emit('approve danmu', {data: msg.data});
         $('#msg-queue tr:first').remove();
     });

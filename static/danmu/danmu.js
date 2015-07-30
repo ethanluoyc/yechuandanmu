@@ -28,7 +28,7 @@ $(document).ready(function() {
     var danmuPlayer = $('#danmu'); // a selector for the danmu div
 
     function show_danmu(danmuPlayer, msg) {
-        console.log(msg);
+        //console.log(msg);
         var heig = danmuPlayer.height()/1.5;
         var row_conut = parseInt(heig / options.font_size_big);
         var row = parseInt(row_conut * Math.random());
@@ -44,7 +44,7 @@ $(document).ready(function() {
             "position": "absolute",
             "top": top_local,
             "left": options.width,
-            "font-size": _randomChoice([60, 70, 80]),
+            "font-size": _randomChoice([50, 60, 70]),
             "white-space": "nowrap",
             "color": "white",
             "opacity": 1.0
@@ -69,8 +69,7 @@ $(document).ready(function() {
 
     // receive and display danmu
     socket.on('post danmu', function(msg) {
-        console.log('received: '+ msg.data);
-        // $('#board').append('<br>Received #' + msg.data);
+        console.log('received: '+ msg);
         show_danmu(danmuPlayer, msg.data);
     });
 });
