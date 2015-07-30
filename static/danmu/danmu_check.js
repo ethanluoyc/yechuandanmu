@@ -1,3 +1,4 @@
+CHECK = true;
 
 var check_io = io.connect('//' + document.domain + ':' + location.port + '/check');
 
@@ -13,7 +14,12 @@ check_io.on('connect', function() {
 
 check_io.on('check danmu', function(msg){
     console.log(msg);
-    $('#msg-queue tr:first').before('<tr><td>'+ msg.data+'</td></tr>');
+    if (CHECK){$('#msg-queue tr:first').before('<tr><td>'+ msg.data+'</td></tr>');}
+    else{
+        console.log(msg);
+        check_io.emit('approve danmu', {data: msg.data});
+    }
+
 });
 
 //check_io.on('remove approval', function(msg){
