@@ -28,7 +28,7 @@ $(document).ready(function() {
     var danmuPlayer = $('#danmu'); // a selector for the danmu div
 
     function show_danmu(danmuPlayer, msg) {
-        //console.log(msg);
+        console.log(msg);
         var heig = danmuPlayer.height()/1.5;
         var row_conut = parseInt(heig / options.font_size_big);
         var row = parseInt(row_conut * Math.random());
@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     // receive and display danmu
     socket.on('post danmu', function(msg) {
-        console.log('received: '+ msg);
+        console.log('received: '+ msg.data);
         // $('#board').append('<br>Received #' + msg.data);
         show_danmu(danmuPlayer, msg.data);
     });

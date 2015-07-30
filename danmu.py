@@ -2,6 +2,9 @@
 
 from flask import Flask, render_template, request, flash
 from flask.ext.socketio import SocketIO, emit
+import logging
+
+logging.basicConfig()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cldds_safeword'
@@ -20,17 +23,30 @@ def post_message():
         msg = request.form['message']
         if msg:
             if len(msg) > 30:
-                flash(u'The message is too long', 'danger')
+                flash(u'The message is too long, max length is 20', 'danger')
                 return render_template('post_form.html')
-            socketio.emit('post danmu', {'data': msg}, namespace='/post')
+            socketio.emit('check danmu', {'data': msg}, namespace='/check')
             flash(u'Post succeeded :)', 'success')
     return render_template('post_form.html')
 
+@socketio.on('approve danmu', namespace='/check')
+def approve_danmu(msg):
+    print msg
+    socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
+
+
+@app.route('/check', methods=['GET'])
+def check_danmu():
+    return render_template('check.html')
 
 @socketio.on('connect', namespace='/post')
 def test_connect():
-    print ('Client connected')
+    print ('Client posting connected')
 
+
+@socketio.on('connect', namespace='/check')
+def test_check_connect():
+    print ('Client checking connected')
 
 # @socketio.on('disconnect', namespace='/post')
 # def test_disconnect():
