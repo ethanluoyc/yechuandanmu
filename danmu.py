@@ -33,6 +33,7 @@ def post_message():
             flash(u'Post succeeded :)', 'success')
     return render_template('post_form.html')
 
+
 @app.route('/check', methods=['GET'])
 def check_danmu():
     return render_template('check.html')
@@ -41,7 +42,8 @@ def check_danmu():
 @socketio.on('approve danmu', namespace='/check')
 def approve_danmu(msg):
     app.logger.info(msg)
-    socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
+    if 'data' in msg:
+        socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
 
 
 @socketio.on('connect', namespace='/post')
