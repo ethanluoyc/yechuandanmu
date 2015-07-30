@@ -21,9 +21,6 @@ def index():
 def post_message():
     if request.method == 'POST':
         msg = request.form['message']
-        if msg and request.args.get['master']:
-            socketio.emit('post danmu', {'data': msg}, namespace='/post')
-            return '', 200
         if msg:
             if len(msg) > 80:
                 flash(u'The message is too long, max length is 20', 'danger')
