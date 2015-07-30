@@ -37,7 +37,7 @@ $(document).ready(function(){
     $(document).bind('keydown', 'right', function() {
                 msg = $('#msg-queue tr:first').text();
                 console.log(msg);
-                io.of('/post').emit('post danmu', {data: msg});
+                check_io.emit('approve danmu', {data: msg.data});
                 $('#msg-queue tr:first').remove();
             });
 });

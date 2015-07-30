@@ -2,9 +2,10 @@
 
 from flask import Flask, render_template, request, flash
 from flask.ext.socketio import SocketIO, emit
-import logging
 
-logging.basicConfig()
+# import logging
+#
+# logging.basicConfig()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cldds_safeword'
@@ -22,6 +23,9 @@ def post_message():
     if request.method == 'POST':
         msg = request.form['message']
         if msg:
+            if "master" in request.form:
+                socketio.emit('post danmu', {'data': msg}, namespace='/post')
+                return ''
             if len(msg) > 80:
                 flash(u'The message is too long, max length is 20', 'danger')
                 return render_template('post_form.html')
