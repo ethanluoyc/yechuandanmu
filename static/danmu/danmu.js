@@ -44,7 +44,7 @@ $(document).ready(function() {
             "position": "absolute",
             "top": top_local,
             "left": options.width,
-            "font-size": _randomChoice([50, 60, 70]),
+            "font-size": _randomChoice([60, 70, 80]),
             "white-space": "nowrap",
             "color": "white",
             "opacity": 1.0
