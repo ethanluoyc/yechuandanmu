@@ -37,7 +37,7 @@ body {
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  /*background-image: url("/static/images/yechuan2.png");*/
+  background-image: url("/static/images/yechuan2.png");
   /*background-size: 100% 100%;*/
   display: table;
   width: 100%;
