@@ -19,8 +19,8 @@ check_io.on('check danmu', function(msg){
     }
     else{
         console.log(msg);
-        //check_io.emit('approve danmu', {data: msg.data});
-        io.of('/post').emit('post danmu', {data: msg.data});
+        check_io.emit('approve danmu', {data: msg.data});
+        // io.of('/post').emit('post danmu', {data: msg.data});
 }});
 
 //check_io.on('remove approval', function(msg){

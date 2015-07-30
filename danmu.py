@@ -21,6 +21,9 @@ def index():
 def post_message():
     if request.method == 'POST':
         msg = request.form['message']
+        if msg and request.args.get['master']:
+            socketio.emit('post danmu', {'data': msg}, namespace='/post')
+            return '', 200
         if msg:
             if len(msg) > 80:
                 flash(u'The message is too long, max length is 20', 'danger')
@@ -29,10 +32,10 @@ def post_message():
             flash(u'Post succeeded :)', 'success')
     return render_template('post_form.html')
 
-# @socketio.on('approve danmu', namespace='/check')
-# def approve_danmu(msg):
-#     print msg
-#     socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
+@socketio.on('approve danmu', namespace='/check')
+def approve_danmu(msg):
+    print msg
+    socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
 
 
 @app.route('/check', methods=['GET'])
