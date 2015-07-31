@@ -69,7 +69,7 @@ $(document).ready(function() {
 
     // receive and display danmu
     socket.on('post danmu', function(msg) {
-        console.log('received: '+ msg);
+        console.log('received: '+ msg.data);
         show_danmu(danmuPlayer, msg.data);
     });
 });
