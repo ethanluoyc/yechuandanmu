@@ -1,0 +1,33 @@
+{
+  "name": "danmu",
+  "version": "1.0.0",
+  "description": "A Flask app using Socket.IO to display live Danmaku. We used it with <3 for 叶串2015!",
+  "main": "danmu.py",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanluoyc/yechuandanmu.git"
+  },
+  "author": "Luo Yicheng <ethanluoyc@gmail.com> (ethanluoyc.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethanluoyc/yechuandanmu/issues"
+  },
+  "homepage": "https://github.com/ethanluoyc/yechuandanmu#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.10.1",
+    "babel-eslint": "^6.0.5",
+    "babel-preset-react": "^6.5.0",
+    "browser-sync": "^2.13.0",
+    "eslint": "^2.13.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-jsx": "^2.0.1",
+    "gulp-livereload": "^3.8.1"
+  }
+}

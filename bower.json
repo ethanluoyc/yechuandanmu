@@ -1,0 +1,28 @@
+{
+  "name": "danmu",
+  "homepage": "https://github.com/ethanluoyc/yechuandanmu",
+  "authors": [
+    "ethanluoyc <ethanluoyc@gmail.com>"
+  ],
+  "description": "danmu for yechuan",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~3.0.0",
+    "jquery.hotkeys": "jquery-hotkeys#~0.2.0",
+    "socket.io": "~1.4.6",
+    "socket.io-client": "~1.4.6",
+    "react": "~15.1.0",
+    "ladda": "~1.0.0"
+  }
+}
