@@ -67,13 +67,15 @@ def post_message():
                               danmaku.to_dict(),
                               namespace='/check')
                 if request.headers['X-Requested-With'] == 'XMLHttpRequest':
-                    print request.headers['Content-Type']
                     return jsonify({'status': 0,
                                     'messages': [{'body': 'Post succeeded :)',
                                                   'category': 'success'}]}), 200
                 flash(u'Post succeeded :)', 'success')
             else:
-                flash(u'The message is too long, max length is 20', 'danger')
+                if request.headers['X-Requested-With'] == 'XMLHttpRequest':
+                    return jsonify({'status': 1,
+                                    'messages': [{'body': u'The message is too long, max length is 80', 'category': 'danger'}]})
+                flash(u'The message is too long, max length is 80', 'danger')
                 return render_template('post_form.html')
         return jsonify({'status': 0,
                         'messages': [{'body': 'Cannot be empty',
