@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <title>Danmu Check</title>
-        <script type="text/javascript" src="//code.jquery.com/jquery-1.4.4.min.js"></script>
-        <!-- Use a version of Socket.io compatible with Flask extension -->
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
-        <script type='text/javascript' src='/static/danmu/danmu_check.js'></script>
-        <script type="text/javascript" src="{{url_for('static',filename='jquery.hotkeys.js') }}"></script>
-    </head>
-    <body>
-        <table>
-            <thead>
-                <tr>
-                    <td>Message</td>
-                </tr>
-            </thead>
-            <tbody id='msg-queue'>
-            </tbody>
-        </table>
-    </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Danmu Supervise</title>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/jquery/dist/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/jquery.hotkeys/jquery.hotkeys.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/babel/browser.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react-dom.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/socket.io-client/socket.io.js') }}"></script>
+  <script type='text/babel' src="{{ url_for('static', filename='js/danmu_check.jsx') }}"></script>
+</head>
+
+<body>
+  <div id="board"></div>
+</body>
+<footer style="position:absolute;bottom:0;">
+  <p>Use left arrow to disprove Danmaku
+    <br> right arrow to approve Danmaku</p>
+</footer>
+
 </html>

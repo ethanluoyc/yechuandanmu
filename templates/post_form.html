@@ -3,11 +3,20 @@
 
 <head lang="en">
     <meta charset="UTF-8">
-    <title>叶串2015-发送弹幕</title>
+    <title>叶串2016-发送弹幕</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/jquery/dist/jquery.min.js') }}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/ladda/dist/ladda.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/babel/browser.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react-dom.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/ladda/dist/spin.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='lib/ladda/js/ladda.js') }}"></script>
+    <script type='text/babel' src="{{ url_for('static', filename='js/post.jsx') }}"></script>
 </head>
 
 <body>
@@ -26,11 +35,7 @@
                     {{ message }} {% endfor %}
                 </div>
                 {% endif %} {% endwith %}
-                <form method="POST" action="">
-                    <input type="text" class="form-control" id="message" name="message" placeholder="弹幕内容">
-                    <br>
-                    <button type="submit" class="btn btn-lg btn-success btn-block">Submit Danmaku</button>
-                </form>
+                <div id="send"></div>
             </div>
         </div>
         <div class="row">

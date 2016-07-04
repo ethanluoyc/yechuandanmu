@@ -1,5 +1,4 @@
 *.pyc
 node_modules
 venv
-*.txt
 test_post.py
