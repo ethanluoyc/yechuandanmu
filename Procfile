@@ -1,1 +1,1 @@
-web: gunicorn --worker-class socketio.sgunicorn.GeventSocketIOWorker --log-file=- danmu:app
+web: gunicorn -k gevent -w 1 --log-file=- danmu:app

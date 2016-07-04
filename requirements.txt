@@ -1,8 +1,11 @@
 click==6.6
+eventlet==0.19.0
 Flask==0.11.1
 Flask-Script==2.0.5
 Flask-SocketIO==2.5
 Flask-SQLAlchemy==2.1
+gevent==1.1.1
+greenlet==0.4.10
 gunicorn==19.6.0
 itsdangerous==0.24
 Jinja2==2.8
