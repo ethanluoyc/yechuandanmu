@@ -38,6 +38,8 @@ class Danmaku(db.Model):
     def get_by_id(cls, id):
         return cls.query.get(id)
 
+db.create_all()
+db.session.commit()
 
 @app.route('/')
 def index():
@@ -122,5 +124,4 @@ def check_connect():
 #     print('Client disconnected')
 
 if __name__ == '__main__':
-    db.create_all()
     socketio.run(app)
