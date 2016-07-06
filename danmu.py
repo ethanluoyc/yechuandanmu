@@ -97,7 +97,7 @@ def approve_danmu(msg):
     if 'data' in msg:
         d = Danmaku.get_by_id(msg['id'])
         d.status = STATUS_FLAGS['approved']
-        d.save()
+        db.session.commit()
         socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
 
 
@@ -107,7 +107,7 @@ def disprove_danmu(msg):
     if 'data' in msg:
         d = Danmaku.get_by_id(msg['id'])
         d.status = STATUS_FLAGS['disproved']
-        d.save()
+        db.session.commit()
 
 
 @socketio.on('connect', namespace='/post')

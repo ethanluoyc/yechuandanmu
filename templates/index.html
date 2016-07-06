@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- jquery.danmu.js (//github.com/chiruom/danmu/) - Licensed under the MIT license -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,14 +51,13 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.4.min.js"></script>
-    <!-- Use a version of Socket.io compatible with Flask extension -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- jQuery UI javascript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='danmu/jquery.danmu.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='lib/jquery.danmu/OldEdition/dist/jquery.danmu.js') }}"></script>
     <!-- jQuery Hotkey -->
-    <script type="text/javascript" src="{{url_for('static',filename='jquery.hotkeys.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='lib/jquery.hotkeys/jquery.hotkeys.js') }}"></script>
     <!-- Script for keyboard shortcut -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -101,6 +100,6 @@
         })
     </script>
     <!-- Script for Socket.IO and Danmu-->
-    <script type="text/javascript" src="{{url_for('static',filename='danmu/danmu.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/danmu.js') }}"></script>
 </body>
 </html>
