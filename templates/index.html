@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- jquery.danmu.js (//github.com/chiruom/danmu/) - Licensed under the MIT license -->
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,91 +14,51 @@
     <link href="{{url_for('static',filename='css/cover.css')}}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+  </head>
+  <body>
     <div class="site-wrapper">
-        <div class="site-wrapper-inner">
-            <div class="cover-container">
-                <div class="masthead clearfix">
-                    <div class="inner">
-                    </div>
-                </div>
-                <div class="inner cover">
-                    <h1 class="cover-heading">叶串之声2015</h1>
-                    <p class="lead">国初华会荣誉呈现</p>
-                </div>
-                <img id="board-logo" src="{{ url_for('static',filename='images/logo_black.png')}}">
-                <div class="url-footer">
-                    <h3>弹幕吐槽在这里: tinyurl.com/yechuan15danmu</h3>
-                </div>
-                <!-- Danmu player div -->
-                <div id="danmuholder">
-                    <div id="danmu"></div>
-                </div>
-                <div class="mastfoot">
-                    <div class="inner">
-                        <p><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by Luo Yicheng</p>
-                    </div>
-                </div>
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
             </div>
+          </div>
+          <div class="inner cover">
+            <h1 class="cover-heading">叶串之声2015</h1>
+            <p class="lead">国初华会荣誉呈现</p>
+          </div>
+          <img id="board-logo" src="{{ url_for('static',filename='images/logo_black.png')}}">
+          <div class="url-footer">
+            <h3>弹幕吐槽在这里: tinyurl.com/yechuan15danmu</h3>
+          </div>
+          <!-- Danmu player div -->
+          <div id="danmuholder">
+            <div id="danmu"></div>
+          </div>
+          <div class="mastfoot">
+            <div class="inner">
+              <p><i class="fa fa-code"></i> with <i class="fa fa-heart"></i> by Luo Yicheng</p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <!-- Bootstrap core JavaScript
-    ================================================== -->
+      ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.4.min.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- jQuery UI javascript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- jquery.danmu.js (//github.com/chiruom/danmu/) - Licensed under the MIT license -->
     <script type="text/javascript" src="{{url_for('static',filename='lib/jquery.danmu/OldEdition/dist/jquery.danmu.js') }}"></script>
     <!-- jQuery Hotkey -->
     <script type="text/javascript" src="{{url_for('static',filename='lib/jquery.hotkeys/jquery.hotkeys.js') }}"></script>
-    <!-- Script for keyboard shortcut -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(document).bind('keydown', 'd', function() {
-                if ($('#danmuholder').css("display") == 'none') {
-                    $('#danmuholder').fadeIn("slow", function() {
-                        $("#board-logo").fadeIn("slow", function() {
-                            $(".url-footer").fadeIn("slow");
-                        });
-                    });
-                } else {
-                    $("#board-logo").fadeOut("slow", function() {
-                        $('#danmuholder').fadeOut("slow");
-                    });
-                    $(".url-footer").fadeOut("slow");
-
-                }
-
-            });
-
-            $(document).bind('keydown', 'n', function() {
-                $(".url-footer").fadeToggle("slow");
-            });
-            // Toggle opacity of the Danmuplayer, use animate rather than fade to avoid texts from inner divs from being affected by the changes in opacity
-            $(document).bind('keypress', 'j', function() {
-                console.log('pressed');
-                $("#danmu").animate({
-                    backgroundColor: "rgba(0,0,0,1)"
-                }, 600);
-            });
-
-            $(document).bind('keypress', 'k', function() {
-                console.log("pressed");
-                $("#danmu").animate({
-                    backgroundColor: "rgba(0,0,0,0.7)"
-                }, 600);
-            });
-
-
-        })
-    </script>
     <!-- Script for Socket.IO and Danmu-->
     <script type="text/javascript" src="{{url_for('static',filename='js/danmu.js') }}"></script>
-</body>
+  </body>
 </html>
