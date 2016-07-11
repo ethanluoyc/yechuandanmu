@@ -3,3 +3,4 @@ node_modules
 venv
 test_post.py
 *.db
+static/js/build

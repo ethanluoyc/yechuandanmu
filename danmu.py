@@ -41,6 +41,7 @@ class Danmaku(db.Model):
 db.create_all()
 db.session.commit()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -48,7 +49,7 @@ def index():
 
 @app.route('/post', methods=['GET', 'POST'])
 def post_message():
-
+    # TODO refactor this
     def mk_danmaku(msg):
         d = Danmaku(msg)
         db.session.add(d)
@@ -57,7 +58,7 @@ def post_message():
 
     if request.method == 'POST':
         msg = request.form['message']
-        if msg:
+        if len(msg) > 0:
             if len(msg) <= 80:
                 danmaku = mk_danmaku(msg)
                 if "master" in request.form:
@@ -74,13 +75,15 @@ def post_message():
                                                   'category': 'success'}]}), 200
                 flash(u'Post succeeded :)', 'success')
             else:
-                if request.headers['X-Requested-With'] == 'XMLHttpRequest':
+                err_msg = u'The message is too long, max length is 80'
+                if request.headers.get('X-Requested-With', None) == 'XMLHttpRequest':
                     return jsonify({'status': 1,
-                                    'messages': [{'body': u'The message is too long, max length is 80', 'category': 'danger'}]})
-                flash(u'The message is too long, max length is 80', 'danger')
+                                    'messages': [{'body': err_msg, 'category': 'danger'}]})
+                flash(err_msg, 'danger')
                 return render_template('post_form.html')
+        err_msg = 'Cannot be empty'
         return jsonify({'status': 0,
-                        'messages': [{'body': 'Cannot be empty',
+                        'messages': [{'body': err_msg,
                                       'category': 'danger'}]}), 400
 
     return render_template('post_form.html')
@@ -93,7 +96,7 @@ def check_danmu():
 
 @socketio.on('approve danmu', namespace='/check')
 def approve_danmu(msg):
-    app.logger.info(msg)
+    app.logger.debug(msg)
     if 'data' in msg:
         d = Danmaku.get_by_id(msg['id'])
         d.status = STATUS_FLAGS['approved']
@@ -103,7 +106,7 @@ def approve_danmu(msg):
 
 @socketio.on('disprove danmu', namespace='/check')
 def disprove_danmu(msg):
-    app.logger.info(msg)
+    app.logger.debug(msg)
     if 'data' in msg:
         d = Danmaku.get_by_id(msg['id'])
         d.status = STATUS_FLAGS['disproved']
@@ -111,17 +114,24 @@ def disprove_danmu(msg):
 
 
 @socketio.on('connect', namespace='/post')
-def post_connect():
-    app.logger.info('Board posting connected')
+def board_connect():
+    app.logger.debug('Board posting connected')
+
+
+@socketio.on('disconnect', namespace='/post')
+def board_disconnect():
+    app.logger.debug('Board posting disconnected')
 
 
 @socketio.on('connect', namespace='/check')
 def check_connect():
-    app.logger.info('Checking connected')
+    app.logger.debug('Checking connected')
 
-# @socketio.on('disconnect', namespace='/post')
-# def test_disconnect():
-#     print('Client disconnected')
+
+@socketio.on('disconnect', namespace='/check')
+def check_disconnect():
+    app.logger.debug('Checking disconnected')
+
 
 if __name__ == '__main__':
     socketio.run(app)

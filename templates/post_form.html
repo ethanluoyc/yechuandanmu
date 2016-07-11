@@ -2,56 +2,55 @@
 <html>
 
 <head lang="en">
-    <meta charset="UTF-8">
-    <title>叶串2016-发送弹幕</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="{{ url_for('static', filename='lib/jquery/dist/jquery.min.js') }}"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='lib/ladda/dist/ladda.min.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='lib/babel/browser.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react-dom.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='lib/ladda/dist/spin.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='lib/ladda/js/ladda.js') }}"></script>
-    <script type='text/babel' src="{{ url_for('static', filename='js/post.jsx') }}"></script>
+  <meta charset="UTF-8">
+  <title>叶串{{config['YEAR']}}-发送弹幕</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/jquery/dist/jquery.min.js') }}"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/ladda/dist/ladda.min.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/react/react-dom.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/ladda/dist/spin.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/ladda/js/ladda.js') }}"></script>
+  <script type='text/javascript' src="{{ url_for('static', filename='js/build/post.js') }}"></script>
 </head>
 
 <body>
-    <div class="container container-body">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="page-header">
-                    <h1 style="display: block;">叶串之声2016</h1>
-                </div>
-            </div>
+  <div class="container container-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="page-header">
+          <h1 style="display: block;">叶串之声{{config['YEAR']}}</h1>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-                {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %} {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                    {{ message }} {% endfor %}
-                </div>
-                {% endif %} {% endwith %}
-                <div id="send"></div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
-                <center>
-                    <img src="{{ url_for('static',filename='images/logo_white.jpeg') }}" width="100" class="btm-logo" style="margin-top: 20px" />
-                </center>
-            </div>
-        </div>
+      </div>
     </div>
-    <footer class="navbar-fixed-bottom">
-        <div class="container">
-            <a href="https://github.com/ethanluoyc/yechuandanmu" title="About">About</a>
-            <span class="text-nowrap pull-right"><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color:#ff4f33"></i></span>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+        {% with messages = get_flashed_messages(with_categories=True) %} {% if messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }} {% endfor %}
         </div>
-    </footer>
+        {% endif %} {% endwith %}
+        <div id="send"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-6 col-sm-offset-1 col-md-offset-3">
+        <center>
+          <img src="{{ url_for('static',filename='images/logo_white.jpeg') }}" width="100" class="btm-logo" style="margin-top: 20px" />
+        </center>
+      </div>
+    </div>
+  </div>
+  <footer class="navbar-fixed-bottom">
+    <div class="container">
+      <a href="https://github.com/ethanluoyc/yechuandanmu" title="About">About</a>
+      <span class="text-nowrap pull-right"><i class="fa fa-code"></i> with <i class="fa fa-heart" style="color:#ff4f33"></i></span>
+    </div>
+  </footer>
 </body>
 
 </html>

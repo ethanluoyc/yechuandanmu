@@ -1,4 +1,19 @@
+const logo =[
+" __  __          __                         ____                             ",
+" \\ \\/ /__  _____/ /_  __  ______ _____     / __ \\____ _____  ____ ___  __  __",
+"  \\  / _ \\/ ___/ __ \\/ / / / __ `/ __ \\   / / / / __ `/ __ \\/ __ `__ \\/ / / /",
+"  / /  __/ /__/ / / / /_/ / /_/ / / / /  / /_/ / /_/ / / / / / / / / / /_/ / ",
+" /_/\\___/\\___/_/ /_/\\__,_/\\__,_/_/ /_/  /_____/\\__,_/_/ /_/_/ /_/ /_/\\__,_/  ",
+" Use the following keys to control this page: ",
+" `d` to show and hide the Danmaku page;",
+" `j` and `k` to make the opacity higher/lower;",
+" `n` to toggle the display of the TinyURL;",
+" made with <3 by Yicheng Luo and contributors."].join("\n");
+
+
 $(document).ready(function() {
+  console.log(logo);
+
   var danmuss = {};
   // Settings for the Danmu Player!
   var options = {
