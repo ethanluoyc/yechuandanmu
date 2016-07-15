@@ -1,13 +1,55 @@
-from flask_script import Manager
-from danmu import app, socketio
+#!/usr/bin/env python
 
-manager = Manager(app)
+from flask_script import Manager, Shell, prompt_bool
+from danmu import app, socketio, db, FeatureFlag, Danmaku
+
+
+def _make_context():
+    return dict(app=app, db=db, FeatureFlag=FeatureFlag, Danmaku=Danmaku)
+
+manager = Manager(app, with_default_commands=False)
+
+
+@manager.option('-s', '--status', dest='status', default=None)
+def supervise(status):
+    if not status:
+        status = 'on' if FeatureFlag.toggle_flag('supervise') else 'off'
+    else:
+        if status == 'on':
+            f = True
+        elif status == 'off':
+            f = False
+        status = FeatureFlag.toggle_flag('supervise', f)
+    print('Supervise is now turned {0}'.format(status))
+
+
+@manager.command
+def dropdb():
+    if prompt_bool(
+        "Are you sure you want to lose all your data"):
+        db.drop_all()
+
+
+@manager.command
+def createdb():
+    db.create_all()
+    db.session.commit()
+
+    def add_supervise_flag():
+        flag = FeatureFlag.get_flag('supervise')
+        if not flag:
+            flag = FeatureFlag('supervise')
+            db.session.add(flag)
+            db.session.commit()
+
+    add_supervise_flag()
 
 
 @manager.command
 def run():
     socketio.run(app)
 
+manager.add_command('shell', Shell(make_context=_make_context))
 
 if __name__ == "__main__":
     manager.run()

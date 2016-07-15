@@ -12,6 +12,10 @@ var prod = environments.productions;
 
 gulp.task('default',['js']);
 
+gulp.task('watch', function() {
+  gulp.watch(['static/js/src/*.js{,x}'], ['js']);
+});
+
 gulp.task('js', function() {
   gulp.src(['static/js/src/*.jsx'])
     .pipe(dev(sourcemaps.init()))

@@ -15,11 +15,22 @@ var PostForm = React.createClass({
       success: function(data) {
         form.setState({messages: data.messages});
       }
-    }).fail(function(res, status, error) {
-      form.setState({messages: res.responseJSON.messages});
-    }
-  ).always(function() {
-    l.toggle();
+    }).fail(function(jqxhr, textStatus, err) {
+      if (jqxhr.status == 500) {
+        const messages = [
+          {body: '500: Internal Server Error', category: 'danger'}
+        ];
+        form.setState({messages: messages});
+      } else if (jqxhr.status == 400) {
+        form.setState({messages: jqxhr.responseJSON.messages});
+      } else {
+        const messages = [
+          {body: 'Unknown error, maybe try a refresh?', category: 'danger'}
+        ];
+        form.setState({messages: jqxhr.responseJSON.messages});
+      }
+    }).always(function() {
+      l.toggle();
   });
 }, getInitialState : function() {
   return {

@@ -22,7 +22,7 @@ STATUS_FLAGS = {
 
 
 class Danmaku(db.Model):
-
+    MAX_LENGTH = 80
     id = db.Column(db.Integer, primary_key=True)
     msg = db.Column(db.String(80))
     status = db.Column(db.Integer, nullable=False)
@@ -38,9 +38,67 @@ class Danmaku(db.Model):
     def get_by_id(cls, id):
         return cls.query.get(id)
 
-db.create_all()
-db.session.commit()
+    def validate(self):
+        if not self.msg:
+            raise DanmakuNonEmpty('Danmaku cannot be empty')
+        if len(self.msg) > Danmaku.MAX_LENGTH:
+            raise DanmakuTooLong('Danmaku exceeds max length ({0})'
+                                 .format(Danmaku.MAX_LENGTH))
 
+    def save(self):
+        db.session.add(self)
+        return db.session.commit()
+
+
+class DanmakuValidateException(Exception):
+    """Base class for Validation exception for danmaku"""
+
+
+class DanmakuTooLong(DanmakuValidateException):
+    "raised when Danmaku is too long"
+
+
+class DanmakuNonEmpty(DanmakuValidateException):
+    "raised when Danmaku is either None or empty (aka '')"
+
+
+class SUPERVISE_STATUS:
+    ENABLED = True
+    DISABLED = False
+
+
+class FeatureFlag(db.Model):
+    name = db.Column(db.String(80), primary_key=True)
+    status = db.Column(db.Boolean)
+
+    def __init__(self, name, status=STATUS_FLAGS['waiting']):
+        self.name = name
+        self.status = True # Default to true
+
+    @classmethod
+    def get_flag(cls, name):
+        return cls.query.get(name)
+
+    @classmethod
+    def toggle_flag(cls, name, status=None):
+        flag = cls.get_flag(name)
+        if not status:
+            if flag.status:
+                flag.status = False
+            else:
+                flag.status = True
+        else:
+            flag.status = bool(status)
+        db.session.commit()
+        return flag.status
+
+    def save(self):
+        db.session.add(self)
+        return db.session.commit()
+
+
+
+# Below are routes for the application
 
 @app.route('/')
 def index():
@@ -49,44 +107,44 @@ def index():
 
 @app.route('/post', methods=['GET', 'POST'])
 def post_message():
-    # TODO refactor this
-    def mk_danmaku(msg):
-        d = Danmaku(msg)
-        db.session.add(d)
-        db.session.commit()
-        return d
+    def _is_ajax():
+        return request\
+            .headers.get('X-Requested-With', None) == 'XMLHttpRequest'
 
-    if request.method == 'POST':
+    def _respond_with_exn(exn):
+        err_message = exn.message
+        app.logger.debug(err_message)
+        if request.headers.get('X-Requested-With', None) == 'XMLHttpRequest':
+            return jsonify({'status': 1,
+                            'messages': [{'body': err_message,
+                                          'category': 'danger'}]}), 400
+        flash(err_message, 'danger')
+
+    if request.method == 'GET':
+        return render_template('post_form.html')
+
+    # Handle `POST`
+    try:
         msg = request.form['message']
-        if len(msg) > 0:
-            if len(msg) <= 80:
-                danmaku = mk_danmaku(msg)
-                if "master" in request.form:
-                    socketio.emit('post danmu',
-                                  danmaku.to_dict(),
-                                  namespace='/post')
-                    return 0, 200
-                socketio.emit('check danmu',
-                              danmaku.to_dict(),
-                              namespace='/check')
-                if request.headers['X-Requested-With'] == 'XMLHttpRequest':
-                    return jsonify({'status': 0,
-                                    'messages': [{'body': 'Post succeeded :)',
-                                                  'category': 'success'}]}), 200
-                flash(u'Post succeeded :)', 'success')
-            else:
-                err_msg = u'The message is too long, max length is 80'
-                if request.headers.get('X-Requested-With', None) == 'XMLHttpRequest':
-                    return jsonify({'status': 1,
-                                    'messages': [{'body': err_msg, 'category': 'danger'}]})
-                flash(err_msg, 'danger')
-                return render_template('post_form.html')
-        err_msg = 'Cannot be empty'
-        return jsonify({'status': 0,
-                        'messages': [{'body': err_msg,
-                                      'category': 'danger'}]}), 400
+        danmaku = Danmaku(msg)
+        supervise_flag = FeatureFlag.get_flag('supervise')
+        danmaku.validate()
 
-    return render_template('post_form.html')
+        if ('master' in request.form) or (not supervise_flag.status):
+            danmaku.status = STATUS_FLAGS['approved']
+            socketio.emit('post danmu', danmaku.to_dict(), namespace='/post')
+        else:
+            socketio.emit('check danmu', danmaku.to_dict(), namespace='/check')
+
+        danmaku.save()
+    except (DanmakuTooLong, DanmakuNonEmpty), e:
+        return _respond_with_exn(e)
+    else:
+        if request.headers['X-Requested-With'] == 'XMLHttpRequest':
+            return jsonify({'status': 0,
+                            'messages': [{'body': 'Post succeeded :)',
+                                          'category': 'success'}]}), 200
+        flash(u'Post succeeded :)', 'success')
 
 
 @app.route('/check', methods=['GET'])

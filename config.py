@@ -4,6 +4,7 @@ import os
 class BaseConfig:
     YEAR = 2016  # Change the year here for all site's year to take effect
     SECRET_KEY = os.environ.get('DANMU_SECRET', 'cldds_safeword')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 class DevConfig(BaseConfig):
