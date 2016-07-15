@@ -4,7 +4,8 @@
   "description": "A Flask app using Socket.IO to display live Danmaku. We used it with <3 for 叶串2015!",
   "main": "danmu.py",
   "scripts": {
-    "test": "test"
+    "test": "make test",
+    "build": "gulp"
   },
   "repository": {
     "type": "git",
@@ -16,7 +17,7 @@
     "url": "https://github.com/ethanluoyc/yechuandanmu/issues"
   },
   "homepage": "https://github.com/ethanluoyc/yechuandanmu#readme",
-  "devDependencies": {
+  "dependencies": {
     "babel": "^6.5.2",
     "babel-cli": "^6.10.1",
     "babel-eslint": "^6.1.0",
