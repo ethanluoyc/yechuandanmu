@@ -12,6 +12,12 @@ class DevConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///dev.db'
 
 
+class TestConfig(BaseConfig):
+    DEBUG = True
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+
+
 class ProdConfig(BaseConfig):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'postgresql://postgres:@localhost:5432/yechuan')

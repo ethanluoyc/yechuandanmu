@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from flask_script import Manager, Shell, prompt_bool
-from danmu import app, socketio, db, FeatureFlag, Danmaku
+from danmu import FeatureFlag, Danmaku, initdb, db
+from danmu import app
 
 
 def _make_context():
@@ -32,21 +33,11 @@ def dropdb():
 
 @manager.command
 def createdb():
-    db.create_all()
-    db.session.commit()
-
-    def add_supervise_flag():
-        flag = FeatureFlag.get_flag('supervise')
-        if not flag:
-            flag = FeatureFlag('supervise')
-            db.session.add(flag)
-            db.session.commit()
-
-    add_supervise_flag()
-
+    initdb()
 
 @manager.command
 def run():
+    from danmu import socketio
     socketio.run(app)
 
 manager.add_command('shell', Shell(make_context=_make_context))
