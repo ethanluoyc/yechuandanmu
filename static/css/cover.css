@@ -88,6 +88,16 @@ body {
   top:80%;
 }
 
+#qrcode {
+  display:none;
+  position:absolute;
+  z-index:101;
+  width:100px;
+  height:100px;
+  /*transform: translate(-50%,-50%);*/
+  right:10px;
+  top:80%;
+}
 
 /*
  * Header
