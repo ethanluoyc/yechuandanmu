@@ -113,6 +113,10 @@ $(document).ready(function() {
 
   });
 
+  $(document).bind('keydown', 'q', function() {
+    $("#qrcode").fadeToggle("slow");
+  });
+
   $(document).bind('keydown', 'n', function() {
     $(".url-footer").fadeToggle("slow");
   });
