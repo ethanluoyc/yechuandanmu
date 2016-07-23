@@ -178,9 +178,10 @@ def approve_danmu(msg):
     app.logger.debug(msg)
     if 'data' in msg:
         d = Danmaku.get_by_id(msg['id'])
+        if d.status == STATUS_FLAGS['waiting']:
+            socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
         d.status = STATUS_FLAGS['approved']
         db.session.commit()
-        socketio.emit('post danmu', {'data': msg['data']}, namespace='/post')
 
 
 @socketio.on('disprove danmu', namespace='/check')
