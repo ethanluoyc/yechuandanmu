@@ -42,16 +42,28 @@ $(document).ready(function() {
   // a selector for the danmu div
   var danmuPlayer = $('#danmu');
 
+  var row_number = 0;
+  var row_number_max = 7; //7 is the magic number of row_count below in my browser
+  var danmu_count = 0;
+
   function show_danmu(danmuPlayer, msg) {
     //console.log(msg);
+    clearTimeout(reset_row_number);
+    var reset_row_number = setTimeout("row_number = 0", options.speed); // Reset to top after some time
+    row_number += 1;
+    if (row_number > row_number_max) {
+      row_number = 0
+    }
     var heig = danmuPlayer.height() / 1.5;
     var row_conut = parseInt(heig / options.font_size_big);
-    var row = parseInt(row_conut * Math.random());
+    var vertical_layer = 1.0 * row_number / row_number_max; // Math.random()
+    var row = parseInt(row_conut * vertical_layer);
     var top_local = (row) * options.font_size_big;
 
     var a_danmu = '<div class=\'flying flying2\' id=\'linshi\'></div>';
     danmuPlayer.append(a_danmu);
-    var fly_tmp_name = 'fly' + parseInt(heig * Math.random()).toString();
+    var fly_tmp_name = 'fly' + danmu_count.toString(); // parseInt(heig * Math.random()).toString();
+    danmu_count += 1; // Give distinct identity
 
     $('#linshi').attr('id', fly_tmp_name);
     $('#' + fly_tmp_name).text(msg);
