@@ -13,6 +13,9 @@ Brought to you by NJC CLDDS, proud to be an NJCian!
 国初华会, 薪火相传.
 
 ## CHANGELOG
+29 July 2016
+- Deployed for Yechuan 2016 (千面佛). Many thanks to [JoeyTeng](https://github.com/JoeyTeng)
+who helped with this year's upgrade and testing.
 
 06 July 2016
 
