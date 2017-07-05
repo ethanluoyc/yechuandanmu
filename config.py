@@ -1,8 +1,9 @@
 import os
+import time
 
 
 class BaseConfig:
-    YEAR = 2016  # Change the year here for all site's year to take effect
+    YEAR = time.strftime("%Y", time.localtime())  # Try to automatically config the year
     SECRET_KEY = os.environ.get('DANMU_SECRET', 'cldds_safeword')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
